@@ -1,0 +1,86 @@
+﻿@model WebApplicationASP.Models.HealthyModel
+
+@{
+    ViewData["Title"] = "Heatlthy";
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-sm-10 col-md-8 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header">
+
+
+                <h4>HealthyModel</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Heatlthy">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="DOCUMENT_ID" class="control-label"></label>
+                        <input disabled class="form-control" value=@ViewBag.documentId />
+
+                    </div>
+                    <div class="form-group">
+
+                        <input type="hidden" asp-for="DOCUMENT_ID" class="form-control" value=@ViewBag.documentId />
+                        <span asp-validation-for="DOCUMENT_ID" class="text-danger"></span>
+                    </div>
+                   
+
+                
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input asp-for="STATUS_HEALTHY" type="radio" value="Y" class="form-check-input" />
+                            <label asp-for="STATUS_HEALTHY" class="form-check-label">หายปกติ</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input asp-for="STATUS_HEALTHY" type="radio" value="N" class="form-check-input" />
+                            <label asp-for="STATUS_HEALTHY" class="form-check-label">ยังไม่หาย</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DETAIL" class="control-label"></label>
+                        <textarea asp-for="DETAIL" class="form-control"></textarea>
+                        <span asp-validation-for="DETAIL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ID_PERSONAL_HEALTHY" class="control-label"></label>
+                        <input type="password" asp-for="ID_PERSONAL_HEALTHY" class="form-control" />
+                        <span asp-validation-for="ID_PERSONAL_HEALTHY" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <input type="submit" value="บันทึกข้อมูล" class="btn btn-primary" />
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="card-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+      
+    </div>
+</div>
+
+<td>
+    <a style="width:110px" class="btn btn-dark" asp-controller="Leaving" asp-action="Details" asp-route-id="@ViewBag.documentId">กลับ</a>
+</td>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

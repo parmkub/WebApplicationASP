@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebApplicationASP.Models.ContectPersonalModel>
+
+@{
+    ViewData["Title"] = "ContectPersonal";
+}
+
+<div class="card">
+    <div class="card-header bg-primary">
+<div class="card-title ">
+			<span>รายชื่อผู้ติดต่อทั้งหมด</span>
+		</div>
+
+    </div>
+    <div class="card-body">
+        <table class="table" id="example1">
+            <thead>
+                <tr>
+                @*     <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th> *@
+                    <th>
+                        @Html.DisplayNameFor(model => model.First_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Last_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.career)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Employee_code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Card_raw)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                       @*  <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td> *@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.First_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Last_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.career)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee_code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Card_raw)
+                        </td>
+                        @* <td>
+                            @Html.ActionLink("Edit", "EditContectPersonal", new { id = item.Id }) |
+                          
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td> *@
+                        <td>
+                            <a asp-action="EditContectPersonal" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa fa-edit"></i> แก้ไข</a>
+							<a asp-action="DeleteContectPersonal" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash"></i> ลบ</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="card-footer">
+        <a asp-action="CreateContectPersonal" class="btn btn-primary">Create New</a>
+    </div>
+
+</div>
+
+

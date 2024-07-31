@@ -1,0 +1,71 @@
+﻿@model WebApplicationASP.Models.AbsenceModel
+
+@{
+	ViewData["Title"] = "EditAbsence";
+}
+
+
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<div class="card shadow">
+			<div class="card-header">
+				<h4>EditAbsence</h4>
+
+			</div>
+
+			<div class="card-body">
+
+
+				<form asp-action="EditAbsence">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					@*   <div class="form-group">
+					<label asp-for="ABSENCE_DOCUMENT" class="control-label"></label>
+					<input asp-for="ABSENCE_DOCUMENT" class="form-control" />
+					<span asp-validation-for="ABSENCE_DOCUMENT" class="text-danger"></span>
+					</div> *@
+					<input type="hidden" asp-for="ABSENCE_DOCUMENT" />
+					<div class="form-group">
+						<label asp-for="ABSENCE_DATE" class="control-label"></label>
+						<input disabled  asp-for="ABSENCE_DATE" class="form-control" />
+						<span asp-validation-for="ABSENCE_DATE" class="text-danger"></span>
+					</div>
+					<input type="hidden" asp-for="ABSENCE_DATE"/>
+					<div class="form-group">
+						<label asp-for="EMPLOYEE_CODE" class="control-label"></label>
+						<input disabled asp-for="EMPLOYEE_CODE" class="form-control" />
+						<span asp-validation-for="EMPLOYEE_CODE" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ABSENCE_CODE" class="control-label"></label>
+						<input asp-for="ABSENCE_CODE" class="form-control" />
+						<span asp-validation-for="ABSENCE_CODE" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ABSENCE_DAY" class="control-label"></label>
+						<input asp-for="ABSENCE_DAY" class="form-control" />
+						<span asp-validation-for="ABSENCE_DAY" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="ABSENCE_HOUR" class="control-label"></label>
+						<input asp-for="ABSENCE_HOUR" class="form-control" />
+						<span asp-validation-for="ABSENCE_HOUR" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" value="Save" class="btn btn-primary" />
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div>
+			@Html.ActionLink("Back to List", "Edit","Admin", new {  id=Model.ABSENCE_DOCUMENT})
+		</div>
+	</div>
+</div>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

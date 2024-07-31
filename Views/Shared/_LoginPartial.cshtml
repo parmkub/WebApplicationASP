@@ -1,0 +1,23 @@
+﻿
+@using System.Security.Principal
+@{
+    string[] name = User.Identity!.Name!.Split('\\');
+    string username = name[1].ToUpper();
+
+}
+
+<ul class="navbar-nav">
+
+    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <span class="nav-link text-dark">สวัสดี @username</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Leaving" asp-action="SignOut">ออกจากระบบ</a>
+        </li>
+
+    }
+  
+
+</ul>

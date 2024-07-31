@@ -1,0 +1,476 @@
+﻿@model WebApplicationASP.Models.LeavingViewModel
+@{
+	ViewData["Title"] = "Details";
+	var imge = ViewBag.imgUrl;
+	string typeLagit = "";
+	string typeSick = "";
+	string typeVacation = "";
+	string typeLakrod = "";
+	string day = "";
+	string hour = "";
+
+	string healthCheckY = "";
+	string healthCheckN = "";
+	HealthyModel healthyModel = ViewBag.healthyModel;
+
+	string page = ViewBag.Page;
+	string pageAdmin = ViewBag.Admin;
+	string pageAdminBkk = ViewBag.AdminBkk;
+
+
+	if (Model.ABSENCE_CODE == "AB" || Model.ABSENCE_CODE == "02")
+	{
+		typeLagit = "checked";
+	}
+	if (Model.ABSENCE_CODE == "11" || Model.ABSENCE_CODE == "BA")
+	{
+		typeSick = "checked";
+	}
+	if (Model.ABSENCE_CODE == "29")
+	{
+		typeVacation = "checked";
+	}
+
+	if (Model.ABSENCE_CODE == "14" || Model.ABSENCE_CODE == "BD")
+	{
+		typeLakrod = "checked";
+	}
+
+	if (healthyModel.STATUS_HEALTHY == "Y")
+	{
+		healthCheckY = "checked";
+	}
+
+	if (healthyModel.STATUS_HEALTHY == "N")
+	{
+		healthCheckN = "checked";
+	}
+
+
+
+
+	//System.Diagnostics.Debug.WriteLine(Model.ABSENCE_HOUR);
+
+	string sectionCode = ViewBag.sectCode;
+	string PageAdmin = ViewBag.Admin;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>PDF</title>
+	<partial name="_Link" />
+
+
+
+</head>
+<body>
+
+	<div class="row justify-content-center">
+
+
+		<div class=" col-12 col-md-10 col-lg-7 col-sm-12 card shadow border-dark ">
+			<div class="card-header">
+
+
+				@if (PageAdmin == "Visable" || pageAdminBkk == "Visable")
+				{
+
+
+					<a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Edit" asp-route-id="@Model.ABSENCE_DOCUMENT">
+						<div class="row justify-content-end">
+							<i class="far fa-edit nav-icon dark"></i>
+
+						</div>
+
+					</a>
+				}
+
+
+				<table align="center">
+					<thead>
+						<tr align="center">
+							<th class="5">บริษัท ซีเฟรชอินดัสตรีจำกัด (มหาชน) 402 หมู่ 8 ตำบล ปากน้ำ อำเภอ เมือง จังหวัดชุมพร 86120</th>
+
+						</tr>
+						<tr align="center">
+							<th class="h5">Seafresh Industry Public Company Limited 402 Village 8, Parknam, Chumphon 86120 Thailand</th>
+
+						</tr>
+
+					</thead>
+				</table>
+
+			</div>
+			<div class="card-body">
+				<table align="center">
+					<thead>
+
+						<tr align="center">
+							<th>ใบลา</th>
+
+						</tr>
+
+					</thead>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:240px">เลขที่เอกสาร: @Model.ABSENCE_DOCUMENT</td>
+							<td></td>
+							<td style="width:200px"></td>
+							<td></td>
+							<td style="width:300px">วันที่ @Model.CREATION_DATE</td>
+
+						</tr>
+						<tr>
+							<td>เรียนผู้บังคับบัญชาต้นสังกัด</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:240px">ข้าพเจ้า..@Model.NAME
+							<td>
+							<td style="width:200px">รหัสพนักงาน..@Model.EMPLOYEE_CODE
+							<td>
+							<td style="width:300px">ตำแหน่ง..@Model.POSITION_NAME</td>
+						</tr>
+
+				</table>
+
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:240px">แผนก @Model.SECT_CODE</td>
+							<td style="width:250px">ส่วน @Model.DIVI_CODE</td>
+							<td style="width:250px">ฝ่าย.@Model.DEPART_CODE</td>
+						</tr>
+
+				</table>
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:150px">มีความประสงค์ขอลา</td>
+							<td style="width:150px"><input type="checkbox" aria-label="Checkbox for following text input" @typeLagit>  ลาเพื่อกิจธุระจำเป็น</td>
+							<td style="width:80px"><input type="checkbox" aria-label="Checkbox for following text input" @typeSick>  ลาป่วย</td>
+							<td style="width:140px"><input type="checkbox" aria-label="Checkbox for following text input" @typeVacation>  ลาพักผ่อนประจำปี</td>
+							<td style="width:120px"><input type="checkbox" aria-label="Checkbox for following text input" @typeLakrod>  ลาคลอดบุคร</td>
+							<td style="width:100px"><input type="checkbox" aria-label="Checkbox for following text input">  ลาเนื่องจาก</td>
+						</tr>
+				</table>
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:180px">อุบัติเหตุจากการทำงาน</td>
+							<td style="width:180px"><input type="checkbox" aria-label="Checkbox for following text input" @ViewBag.checkbox>ลาอื่นๆ(ระบุ)...................</td>
+							<td style="width:380px; font-weight:800">เนื่องจาก  @Model.ABSENCE_DETAIL</td>
+
+						</tr>
+				</table>
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:240px">ตั้งแต่วันที่ @Model.START_DATE </td>
+							<td style="width:250px">ถึงวันที่ @Model.END_DATE</td>
+							<td style="width:250px">รวม @Model.COUNT_DATE วัน @Model.ABSENCE_HOUR ชั่วโมง</td>
+						</tr>
+				</table>
+
+
+				<table align="center">
+
+					<tbody>
+						<tr>
+							<td style="width:740px">ในการลาต้องมีหลักฐานประกอบการลา</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:740px">
+								<input type="checkbox" aria-label="Checkbox for following text input"> ใบรับรองแพทย์ กรณี ลาป่วยติดต่อกัน 3 วันขึ้นไป ลาเนื่องจากอุบัติเหตุในการทำงาน กรณีลาเนื่องจากอุบัติเหตุในการทำงานต้องไปพบแพทย์/พยาบาลประจำบริษัทเพื่อสอบถามอาการ ตามรายละเอียดด้านหลัง
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:740px">
+								<input type="checkbox" aria-label="Checkbox for following text input"> ใบบันทึกประวัติอาการท้องเสีย (กรณีลาป่วยเนื่องจากอาการท้องเสีย ท้องร่วง หรือถ่ายเหลว)
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<br />
+				<table align="center">
+					<tbody>
+						<tr>
+							<td align="center" style="width:370px">
+								<img width="120px" id="myImage" src=@Url.Content(imge) alt="Image">
+							</td>
+							<td align="center" style="width:370px">
+
+								<p>เรียนมาเพื่อพิจารณาอนุมัติ</p>
+								<p>ลงชื่อ @Model.NAME  พนักงาน</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:740px">
+								<p style="font-weight:800">
+									ความคิดเห็น สำหรับแพทย์/พยาบาล ประจำบริษัท กรณีลาป่วย หรือลาเนื่องจากอุบัติเหตุในการทำงาน
+								</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:520px">
+								สอบถามอาการหลังหายป่วย หรืออุบัติเหตุในการทำงานและตรวจสุขภาพเบื้องต้น
+							</td>
+							<td style="width:110px">
+								<input @healthCheckY type="checkbox" aria-label="Checkbox for following text input"> หายเป็นปกติ
+							</td>
+							<td style="width:110px">
+								<input @healthCheckN type="checkbox" aria-label="Checkbox for following text input"> ยังไม่หาย
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:740px">
+								<p style="font-weight:800">
+									เนื่องจาก @healthyModel.DETAIL
+
+
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td style="width:340px">
+							</td>
+							<td align="center" style="width:4000px">
+
+
+								<p>ลงชื่อ @healthyModel.NAME_PERSONAL_HEALTHY แพทย์/พยาบาล วันที่ @healthyModel.LAST_UPDATE_DATE</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<hr />
+				<table align="center">
+					<tbody>
+						<tr>
+							<td align="center" style="width:370px">
+								<p>ลงชื่อ @Model.REVIEW ผู้ทบทวน</p>
+							</td>
+							<td align="center" style="width:370px">
+
+								<p>ลงชื่อ @Model.APPROVE ผู้อนุมัติ</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<table align="center">
+					<tbody>
+						<tr>
+							<td align="center" style="width:370px">
+								<p>วันที่ @Model.DATE_REVIEW</p>
+							</td>
+							<td align="center" style="width:370px">
+
+								<p>วันที่ @Model.DATE_APPROVE</p>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+				<table class="table table-responsive-sm" align="center">
+					<thead>
+						<tr align="center">
+							<th>ส่วนงานตรวจสอบสถิติการลาของพนักงานก่อนการอนุมัติใน Discoverer-Employee Holiday-sheet3 สถิติการลา</th>
+						</tr>
+					</thead>
+
+				</table>
+
+
+				<table class="table table-responsive-sm" align="center">
+					<thead class="border border-dark">
+
+						<tr align="center">
+							<th>การลากิจ ลาป่วย ลาพักผ่อนประจำปี ลาคลอด ลาฝึกทหาร ลาเมตตาจิต และลาอื่นๆ</th>
+						</tr>
+
+
+					</thead>
+
+				</table>
+				<table class="table table-responsive-sm" align="center">
+					<thead class="border border-dark">
+						<tr align="center">
+							<th class="col">R->Review (ทบทวน)     A ->Approve (อนุมัติ)</th>
+						</tr>
+
+					</thead>
+				</table>
+
+				<table align="center" class="table table-responsive-sm ">
+					<thead>
+
+						<tr align="center">
+							<th class="border border-dark" width="196px">หัวหน้าแผนก</th>
+							<th class="border border-dark" width="190px">ผช. /ผจก.ส่วน</th>
+							<th class="border border-dark" width="190px">ผช./ผจก.ฝ่าย</th>
+							<th class="border border-dark" width="190px">ผช./ผจก.ฝ่าย</th>
+						</tr>
+
+
+					</thead>
+					<tbody>
+						<tr align="center">
+							<td align="left" class="border border-dark">-พนักงานรายวัน</td>
+							<td class="border border-dark">R</td>
+							<td class="border border-dark">A</td>
+							<td class="border border-dark"></td>
+						</tr>
+						<tr align="center">
+							<td class="border border-dark" align="left">-จนท.รายเดือน-หน.แผนก</td>
+							<td class="border border-dark">R</td>
+							<td class="border border-dark">A</td>
+							<td class="border border-dark"></td>
+						</tr>
+						<tr align="center">
+							<td class="border border-dark" align="left">-ผช.ผจก.ส่วน - ผจก.ส่วน</td>
+							<td class="border border-dark"></td>
+							<td class="border border-dark">R</td>
+							<td class="border border-dark">A</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+
+				<div class="text-center">
+					<p>
+						ความเห็นของส่วนสรรหา แรงงานสัมพันธ์และสารสนเทศงานบุคคล......................................................................
+				</div>
+				<table align="center">
+					<tbody>
+						<tr align="center">
+							<th width="195px"></th>
+							<th width="190px"></th>
+							<th width="190px">ลงชื่อ........................</th>
+							<th width="190px">........../.........../..........</th>
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+			<div class="card-footer">
+				<div class="row justify-content-between">
+					<div class="col">
+						<a class="btn btn-dark " asp-controller="Leaving" asp-action="PDF" asp-route-id="@Model.ABSENCE_DOCUMENT">พิมพ์ PDF</a>
+
+					</div>
+					<div>
+						<span>F-5210-25(R8-1/5/67)</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+	@if (page == "leaveSickAllPage")
+	{
+		<div>
+			<a class="btn btn-dark" asp-action="LeaveSickAll">Back to List</a>
+		</div>
+	}
+	else if (page == "Index")
+	{
+		<div>
+			<a class="btn btn-dark" asp-action="Index">Back to List  </a>
+		</div>
+	}
+	else if (page == "Admin")
+	{
+		<div>
+			<a class="btn btn-dark" asp-controller="Admin" asp-action="Index">Back to List  </a>
+		</div>
+	}
+	else if (page == "Details")
+	{
+		<div>
+			<a class="btn btn-dark" asp-controller="LeavingAll" asp-action="Index">Back to List  </a>
+		</div>
+	}
+	else
+	{
+		<div>
+			<a class="btn btn-dark" asp-action="Index">Back to List  </a>
+		</div>
+	}
+
+
+
+
+	<div class="row justify-content-center m-2">
+		@if (sectionCode == "5251" && (Model.ABSENCE_CODE == "11" || Model.ABSENCE_CODE == "BA") && healthyModel.STATUS_HEALTHY == "")
+		{
+			<a class="btn btn-primary " asp-controller="Leaving" asp-action="Heatlthy" asp-route-id="@Model.ABSENCE_DOCUMENT">แพทย์บันทึกข้อมูลผู้ป่วย</a>
+		}
+
+
+	</div>
+
+
+
+	<partial name="_Scripts" />
+
+</body>
+</html>
+
+

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebApplicationASP.Models.BomHeaderModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BOM_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ITEM_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.INVENTORY_ITEM_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.APPROVE_PATH_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.APPROVE_FLAG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.INTERFACE_FLAG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREATION_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREATED_BY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LAST_UPDATE_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LAST_UPDATED_BY)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOM_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ITEM_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.INVENTORY_ITEM_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.APPROVE_PATH_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.APPROVE_FLAG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.INTERFACE_FLAG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CREATION_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CREATED_BY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAST_UPDATE_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAST_UPDATED_BY)
+            </td>
+           @*  <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BOM_ID">Delete</a>
+            </td>
+                <td>
+                    <a class="btn btn-info"asp-controller="BomHeader"  asp-action="Edit" asp-route-id="@item.BOM_ID">Edit</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

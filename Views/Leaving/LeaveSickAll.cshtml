@@ -1,0 +1,208 @@
+﻿@model IEnumerable<WebApplicationASP.Models.LeavingViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    var departName = "";
+    departName = ViewBag.departName;
+  
+
+}
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+    <script>
+        alert("@ViewBag.message");
+    </script>
+}
+
+
+
+
+<p>
+    <a class="btn btn-primary" asp-action="CreateSick">เขียนใบลาป่วย</a>
+</p>
+<div class="card shadow-lg">
+    <div class="card-header">
+        <h3>ส่วนงานห้องพยาบาล </h3>
+    </div>
+    <div class="card-body">
+
+
+
+        <table class="table" id="example1">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        <span>สถานะ </span>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SECT_CODE)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.EMPLOYEE_CODE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.START_DATE)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ABSENCE_CODE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ABSENCE_DAY)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ABSENCE_HOUR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ABSENCE_DOCUMENT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ABSENCE_DETAIL)
+                    </th>
+                
+
+
+                    <th></th>
+                    <th></th>
+                
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    double hour = double.Parse(item.ABSENCE_HOUR);
+
+                    if (hour > 0)
+                    {
+                        item.COUNT_DATE = "0";
+
+                    }
+
+                    var txtCode = "";
+                    switch (item.ABSENCE_CODE)
+                    {
+                        case "AB":
+                            txtCode = "ลากิจไม่รับค่าจ้าง";
+                            break;
+                        case "02":
+                            txtCode = "ลากิจ";
+                            break;
+                        case "29":
+                            txtCode = "พักร้อน";
+                            break;
+                        case "11":
+                            txtCode = "ลาป่วย";
+                            break;
+                        case "BA":
+                            txtCode = "ลาป่วยไม่รับเงิน";
+                            break;
+                        case "VL":
+                            txtCode = "ลาไม่รับค่าจ้าง";
+                            break;
+                        default:
+
+                            break;
+                    }
+                    var colorStatus = "";
+                    var txtStatus = "";
+                    switch (item.ABSENCE_STATUS)
+                    {
+                        case "2":
+                            txtStatus = "อนุมัติ";
+                            colorStatus = "badge badge-success";
+                            break;
+                        case "0":
+                            txtStatus = "รอผู้ทบทวน";
+                            colorStatus = "badge badge-warning";
+                            break;
+                        case "1":
+                            txtStatus = "รอผู้อนุมัติ";
+                            colorStatus = "badge badge-warning";
+                            break;
+                        case "3":
+                            txtStatus = "ไม่อนุมัติ";
+                            colorStatus = "badge badge-danger";
+                            break;
+
+                        default:
+
+                            break;
+                    }
+                    if (item.STATUS_APPROVE == "disapprove")
+                    {
+                        colorStatus = "badge badge-danger";
+                        txtStatus = "ไม่อนุมัติ";
+
+                    }
+
+                    <tr>
+                        <td>
+                            <span class="@colorStatus">@txtStatus</span>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SECT_CODE)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMPLOYEE_CODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.START_DATE)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => txtCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.COUNT_DATE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ABSENCE_HOUR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ABSENCE_DOCUMENT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ABSENCE_DETAIL)
+                        </td>
+               
+
+                        @if (int.Parse(item.ABSENCE_STATUS) > 0)
+                        {
+                            <td></td>
+                            
+                        }
+                        else
+                        {
+                            <td>
+                                <a style="width:110px" class="btn btn-danger" asp-controller="Leaving" asp-action="DeleteSick" asp-route-id="@item.ABSENCE_DOCUMENT">ลบ</a>
+                            </td>
+                          
+                        }
+                       
+                        <td>
+                            <a style="width:110px" class="btn btn-info" asp-controller="Leaving" asp-action="Details" asp-route-id="@item.ABSENCE_DOCUMENT">รายละเอียด</a>
+                        </td>
+
+
+                        @*  <td>
+                    <a class="btn btn-warning" asp-controller="Leaving" asp-action="PDF" asp-route-id="@item.ABSENCE_DOCUMENT">PDF</a>
+                    </td>   *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

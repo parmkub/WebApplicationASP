@@ -1,0 +1,327 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+
+<!-- jQuery UI 1.11.4 -->
+<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+	$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstra~/p 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="~/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="~/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="~/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="~/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="~/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="~/plugins/moment/moment.min.js"></script>
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.js"></script>
+<!-- date-range-picker -->
+<script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+
+
+<!-- AdminLTE for demo purposes -->
+@* <script src="~/dist/js/demo.js"></script> *@
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+@* <script src="~/dist/js/pages/dashboard.js"></script> *@
+
+
+
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/plugins/jszip/jszip.min.js"></script>
+<script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<script>
+	$(function () {
+		//Date range picker
+		$('#reservation').daterangepicker()
+
+
+		$("#example1").DataTable({
+
+			"paging": true,
+			"responsive": true,
+			"lengthChange": false,
+			"autoWidth": false,
+			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+			"info": true,
+			"ordering": false,
+			"searching": true
+
+
+		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"searching": true,
+			"ordering": false,
+			"info": true,
+			"autoWidth": false,
+			"responsive": true
+		});
+
+		//Date picker
+		$('#reservationdate').datetimepicker({
+			format: 'L'
+		});
+		//Date range as a button
+		$('#daterange-btn').daterangepicker(
+			{
+				ranges: {
+					'Today': [moment(), moment()],
+					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+					'This Month': [moment().startOf('month'), moment().endOf('month')],
+					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				},
+				startDate: moment().subtract(29, 'days'),
+				endDate: moment()
+
+
+			},
+			function (start, end) {
+				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+
+			}
+
+
+		)
+		//select type hour and day
+		const DisplayDay = document.getElementById("displayDay");
+		const DisplayHour = document.getElementById("displayHour");
+		const radioButtons = document.querySelectorAll('input[type="radio"]');
+		radioButtons.forEach(radio => radio.addEventListener('change', function () {
+			if (this.value == "day") {
+				DisplayDay.style.display = "block";
+				DisplayHour.style.display = "none";
+				var x = document.getElementById("selectHour");
+				x.value = 0;
+
+				var y = document.getElementById("absence_day_start");
+				y.value = "";
+
+			}
+			else if (this.value == "hour") {
+				DisplayDay.style.display = "none";
+				DisplayHour.style.display = "block";
+			}
+		}));
+
+
+
+	});
+</script>
+
+
+
+
+<script>
+
+
+	$(document).ready(function () {
+
+		var imageUrl = "http://10.2.2.5/img/sfi/56-0090.jpg";
+		var username = document.getElementById("username").innerHTML;
+		console.log(username.toLocaleUpperCase());
+		var userUpper = username.toLocaleUpperCase();
+		var url = "http://10.2.2.5/sfi-hr/GetImage.php?username=" + userUpper
+		console.log(url);
+
+		$.ajax({
+			url: url,
+			type: "GET",
+			dataType: "json",
+			success: function (data) {
+				var employee_code = data[0].EMPLOYEE_CODE;
+				employee_code = employee_code.substring(0, 2) + "-" + employee_code.substring(2, 6) + ".jpg";
+				console.log(employee_code);
+				var imageUrl = "http://10.2.2.5/img/sfi/" + employee_code;
+				console.log(imageUrl);
+
+				displayImage(imageUrl);
+			}
+		});
+
+
+
+
+		//displayImage(imageUrl);
+
+		function displayImage(imageUrl) {
+
+			var image = document.getElementById("profile");
+			image.src = imageUrl;
+
+		}
+
+
+	});
+
+</script>
+
+
+@* //insert data from myForm to database oracle with Ajax *@
+
+<script>
+	function submitForm() {
+		var
+	}
+
+</script>
+	
+<script>
+	document.getElementById("myForm").addEventListener("keypress", function (e) {
+		if (e.key === "Enter") {
+			e.preventDefault();
+		}
+	});
+
+	// เลือก Input element
+	const inputElement = document.getElementById('textInput');
+
+	// เพิ่ม Event Listener สำหรับ Input
+	inputElement.addEventListener('input', function () {
+		// ตรวจสอบความยาวของค่าที่ป้อนเข้ามา
+		if (this.value.length === 10) {
+			const card_row = this.value;
+
+			const myModalTitle = document.getElementById('myModalTitle');
+			myModalTitle.textContent = "คุณต้องการลาใช่หรือไม่ ?";
+	// ส่งค่าไปยัง Controller ด้วย Ajax
+		$.ajax({
+				url: 'http://10.2.2.5/sfi-hr/select_check_employee.php?card_row='+card_row+'',
+				type: 'GET',
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					var employee_code = data[0].EMPLOYEE_CODE;
+					const imgEmp = document.getElementById('imgEmp');
+
+					const myEmployeeCode = document.getElementById('myEmployeeCode');
+					const myName = document.getElementById('myName');
+					const mySecCode = document.getElementById('mySecCode');
+					const myDiviCode = document.getElementById('myDiviCode');
+					const myDepartCode = document.getElementById('myDepartCode');
+
+					var _sectCode = data[0].SECT_CODE;
+					if (_sectCode == null) {
+						_sectCode = "-";
+					}
+
+					var _diviCode = data[0].DIVI_CODE;
+					if (_diviCode == null) {
+						_diviCode = "-";
+					}
+
+					var _departCode = data[0].DEPART_CODE;
+					if (_departCode == null) {
+						_departCode = "-";
+					}
+					
+					
+					myEmployeeCode.textContent = "รหัสพนักงาน: " + employee_code;
+					myName.textContent = "ชื่อ: " + data[0].FIRST_NAME + " " + data[0].LAST_NAME;
+					mySecCode.textContent = "รหัสแผนก: " + _sectCode;
+					myDiviCode.textContent = "รหัสส่วน: " + _diviCode;
+					myDepartCode.textContent = "รหัสฝ่าย: " + _departCode;
+					imgEmp.src = "http://10.2.2.5/img/sfi/" + employee_code.substring(0, 2) + "-" + employee_code.substring(2, 6) + ".jpg";
+
+
+					// แสดง Modal โดยใช้ Bootstrap's Modal
+					const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+					myModal.show();
+				}
+			});
+			
+
+
+			// แสดง Modal โดยใช้ Bootstrap's Modal
+			const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+			myModal.show();
+		}
+	});
+
+	//modal cancal Button
+		document.getElementById("cancalModal").addEventListener("click", function (event) {
+		event.preventDefault();
+		const inputElement = document.getElementById('textInput');
+		inputElement.value = "";
+		inputElement.focus();
+	});
+	//modal yes Button
+
+
+	//hind and unhide Input absence_date_new
+	
+
+</script>
+<script>
+	document.getElementById("link").addEventListener("click", function (event) {
+		event.preventDefault();
+
+		// กำหนด User-Agent ให้เป็น Chrome
+		Object.defineProperty(navigator, 'userAgent', {
+			value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+			configurable: true,
+			writable: false
+		});
+
+		// ทดลองเปิดหน้าต่างใหม่ด้วย link ที่กด
+		window.open(event.target.href, '_blank');
+	});
+</script>
+
+<script>
+	const checkbox = document.getElementById('checkboxEditAbsenceStatus');
+	const absence_date_new = document.getElementById('absenceDateNew');
+
+	checkbox.addEventListener('change', (event) => {
+		if (event.target.checked) {
+			absence_date_new.style.display = "block";
+		} else {
+			absence_date_new.style.display = "none";
+		}
+	})
+
+</script>
+
+
+
+
+
+
+
+
+
+
+

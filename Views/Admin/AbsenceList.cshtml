@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApplicationASP.Models.AbsenceModel>
+
+@{
+    ViewData["Title"] = "AbsenceList";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h1>List no data</h1>
+    </div>
+    <div class="card-body">
+
+
+
+
+
+
+<table class="table " id="example1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_DOCUMENT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMPLOYEE_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_CODE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_DAY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_HOUR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_REVIEW)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_APPROVE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ABSENCE_STATUS)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_DOCUMENT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLOYEE_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_CODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_DAY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_HOUR)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_REVIEW)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_APPROVE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ABSENCE_STATUS)
+            </td>
+            <td>
+                   @*  @Html.ActionLink("บันทึก", "InsertAbsence", new {  id=item.ABSENCE_DOCUMENT}) *@
+                 <a style="width:110px" class="btn btn-info" asp-controller="Admin" asp-action="InsertAbsence" asp-route-id="@item.ABSENCE_DOCUMENT">บันทึก</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

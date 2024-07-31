@@ -1,0 +1,63 @@
+﻿@model WebApplicationASP.Models.HealthedModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>HealthedModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID_PERSONAL_HEALTHY" class="control-label"></label>
+                <input asp-for="ID_PERSONAL_HEALTHY" class="form-control" />
+                <span asp-validation-for="ID_PERSONAL_HEALTHY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NAME" class="control-label"></label>
+                <input asp-for="NAME" class="form-control" />
+                <span asp-validation-for="NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="POSITION" class="control-label"></label>
+                <input asp-for="POSITION" class="form-control" />
+                <span asp-validation-for="POSITION" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group">
+                <label asp-for="CREATE_DATE" class="control-label"></label>
+                <input asp-for="CREATE_DATE" class="form-control" />
+                <span asp-validation-for="CREATE_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATE_BY" class="control-label"></label>
+                <input asp-for="CREATE_BY" class="form-control" />
+                <span asp-validation-for="CREATE_BY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAST_UPDATE_DATE" class="control-label"></label>
+                <input asp-for="LAST_UPDATE_DATE" class="form-control" />
+                <span asp-validation-for="LAST_UPDATE_DATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LAST_UPDATE_BY" class="control-label"></label>
+                <input asp-for="LAST_UPDATE_BY" class="form-control" />
+                <span asp-validation-for="LAST_UPDATE_BY" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,73 @@
+﻿@model WebApplicationASP.Models.ContectPersonalModel
+
+@{
+    ViewData["Title"] = "EditContectPersonal";
+}
+
+<div class="card">
+    <div class="card-header bg-primary">
+        <div class="card-title">
+            แก้ไขข้อมูลผู้ติดต่อ
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="EditContectPersonal">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                   @*  <div class="form-group">
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div> *@
+                    <div class="form-group">
+                        <label asp-for="First_name" class="control-label"></label>
+                        <input asp-for="First_name" class="form-control" />
+                        <span asp-validation-for="First_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Last_name" class="control-label"></label>
+                        <input asp-for="Last_name" class="form-control" />
+                        <span asp-validation-for="Last_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="career" class="control-label"></label>
+                        <input asp-for="career" class="form-control" />
+                        <span asp-validation-for="career" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Employee_code" class="control-label"></label>
+                        <input asp-for="Employee_code" class="form-control" />
+                        <span asp-validation-for="career" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Card_raw" class="control-label"></label>
+                        <input asp-for="Card_raw" class="form-control" />
+                        <span asp-validation-for="Card_raw" class="text-danger"></span>
+                    </div>
+                    @*  <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary"  />
+
+                    </div> *@
+                    <div>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div>
+            <hr />
+            <a asp-action="ContectPersonal" class="btn btn-primary">Back to List</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

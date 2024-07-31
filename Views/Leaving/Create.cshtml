@@ -1,0 +1,233 @@
+﻿@model WebApplicationASP.Models.LeavingModel
+
+@{
+	ViewData["Title"] = "Create";
+
+}
+
+
+
+<div class="row  justify-content-center">
+	<div class="card  shadow-lg col-md-6  p-4">
+		<div class="card-header bg-primary">
+
+			<h4 class="text-center">ใบลา</h4>
+		</div>
+		<div class="card-body">
+
+
+			<div>
+				<form asp-action="Create" id="myForm">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					@* <div class="form-group">
+					<label asp-for="absence_document" class="control-label" ></label>
+					<input  asp-for="absence_document" class="form-control" value="@ViewBag.docID" />
+					<span asp-validation-for="absence_document" class="text-danger"></span>
+					</div> *@
+					<input asp-for="absence_document" type="hidden" value="@ViewBag.docID" />
+					@*  <div class="form-group">
+					<label asp-for="absence_date" class="control-label"></label>
+					<input asp-for="absence_date" class="form-control" />
+					<span asp-validation-for="absence_date" class="text-danger"></span>
+					</div> *@
+					<div class="form-group">
+						<label asp-for="card_row" class="control-label" ></label>
+						<input id="textInput" type="password" asp-for="card_row" class="form-control" />
+						<span asp-validation-for="card_row" class="text-danger"></span>
+					</div>
+					@*        <div class="form-group">
+					<label asp-for="employee_code" class="control-label"></label>
+					<input asp-for="employee_code" class="form-control" />
+					<span asp-validation-for="employee_code" class="text-danger"></span>
+					</div> *@
+					<div class="form-group">
+						<label for="exampleSelectBorder" asp-for="absence_code" class="control-label"></label>
+						<select asp-for="absence_code" class="custom-select form-control " id="exampleSelectBorder">
+							<option value="02">ลากิจ</option>
+							<option value="AB">ลากิจไม่รับค่าจ้าง</option>
+							<option value="29">ลาพักร้อน</option>
+							<option value="14">ลาคลอด</option>
+							<option value="BA">ลาคลอดไม่รับค่าจ้าง</option>
+							<option value="23">ลาเมตตาจิต</option>
+							@* <option value="14">ลาคลอด</option>
+							<option value="BD">ลาคลอดไม่รับค่าจ้าง</option> *@
+							@* <option value="11">ลาป่วย</option>
+							<option value="BA">ลาป่วยไม่รับค่าจ้าง</option> *@
+						</select>
+					</div>
+					@*   <div class="form-group">
+					<label asp-for="absence_code" class="control-label"></label>
+					<input asp-for="absence_code" class="form-control" />
+					<span asp-validation-for="absence_code" class="text-danger"></span>
+					</div> *@
+
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-secondary active">
+							<input type="radio" name="options"  value="day" autocomplete="off" checked > ลาวัน
+						</label>
+						<label class="btn btn-secondary">
+							<input type="radio" name="options" value="hour" autocomplete="off"> ลาชั่วโมง
+						</label>
+					
+					</div>
+					<!-- Date range -->
+
+					<div class="form-group" style="display:block" id="displayDay">
+						<label asp-for="absence_day"></label>
+
+						<div class="input-group" >
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="far fa-calendar-alt"></i>
+								</span>
+							</div>
+							<input asp-for="absence_day" type="text" class="form-control float-right" id="reservation">
+							<span asp-validation-for="absence_day" class="text-danger"></span>
+						</div>
+						<!-- /.input group -->
+					</div>
+					@*    <div class="form-group">
+					<label asp-for="absence_day" class="control-label"></label>
+					<input asp-for="absence_day" class="form-control" id="datepicker"/>
+					<span asp-validation-for="absence_day" class="text-danger"></span>
+					</div> *@
+					@* <div class="form-group">
+					<label asp-for="absence_hour" class="control-label"></label>
+					<input asp-for="absence_hour" class="form-control" />
+					<span asp-validation-for="absence_hour" class="text-danger"></span>
+					</div> *@
+					
+					<div class="form-group" style="display:none" id="displayHour">
+						<div class="form-group">
+							<label>วันที่ลา:</label>
+							<div class="input-group date" id="reservationdate" data-target-input="nearest">
+								<input id="absence_day_start" asp-for="absence_day_start" type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+								<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
+						</div>
+						<label for="selectHour" asp-for="absence_hour" class="control-label"></label>
+						<select asp-for="absence_hour" class="custom-select form-control " id="selectHour" >
+							<option value=0>จำนวนชั่วโมง</option>
+							<option value=0.3>ครึ่งชั่วโมง</option>
+							<option value=1>1 ชั่วโมง</option>
+							<option value=1.3>1 ชั่วโมงครึ่ง</option> 
+							<option value=2>2 ชั่วโมง</option>
+							<option value=2.3>2 ชั่วโมงครึ่ง</option>
+							<option value=3>3 ชั่วโมง</option>
+							<option value=3.3>3 ชั่วโมงครึ่ง</option>
+							<option value=4>4 ชั่วโมง</option>
+							<option value=4.3>4 ชั่วโมงครึ่ง</option>
+							<option value=5>5 ชั่วโมง</option>
+							<option value=5.3>5 ชั่วโมงครึ่ง</option>
+							<option value=6>6 ชั่วโมง</option>
+							<option value=6.3>6 ชั่วโมงครึ่ง</option>
+							<option value=7>7 ชั่วโมง</option>
+							<option value=7.3>7 ชั่วโมงครึ่ง</option>
+
+						</select>
+					</div>
+					
+					@*  <div class="form-group">
+					<label asp-for="absence_status" class="control-label"></label>
+					<input asp-for="absence_status" class="form-control" />
+					<span asp-validation-for="absence_status" class="text-danger"></span>
+					</div> *@
+					<div class="form-group">
+						<label asp-for="absence_detail" class="control-label"></label>
+						<textarea asp-for="absence_detail" class="form-control"></textarea>
+						<span asp-validation-for="absence_detail" class="text-danger"></span>
+					</div>
+
+
+					@* <div class="form-group">
+					<label asp-for="absence_token" class="control-label"></label>
+					<input asp-for="absence_token" class="form-control" />
+					<span asp-validation-for="absence_token" class="text-danger"></span>
+					</div> *@
+					@*   <div class="form-group">
+					<label asp-for="dayCount" class="control-label"></label>
+					<input asp-for="dayCount" class="form-control" id="dayCount" />
+					<span asp-validation-for="dayCount" class="text-danger"></span>
+					</div> *@
+					<div class="form-group row justify-content-center">
+						
+							<input style="width:200px" type="submit" value="บันทึก" class="btn btn-primary" onclick="submitForm()" />
+					
+						
+					</div>
+				</form>
+			</div>
+		</div>
+		<div>
+			<p>หมายเหตุ: หากต้องการลาป่วยกรุณาติดต่อห้องพยาบาล</p>
+		</div>
+		<div>
+			<a class="btn btn-primary" asp-action="Index"><i class="fa fa-chevron-left"></i> Back to List</a>
+		</div>
+		
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="myModalTitle"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="card shadow">
+						<div class="card-body">
+
+					
+							<div class="row justify-content-center mb-3">
+								<div class="col">
+									<img class="img-thumbnail"id="imgEmp" alt="employee" width="160" height="200">
+
+								</div>
+								<div class="col">
+									<h6 id="myEmployeeCode"></h6>
+									<h6 id="myName"></h6>
+									<h6 id="mySecCode"></h6>
+									<h6 id="myDiviCode"></h6>
+									<h6 id="myDepartCode"></h6>
+								</div>
+						
+							</div>
+					
+						</div>
+
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button id="cancalModal" type="button" class="btn btn-secondary" data-dismiss="modal">ไม่</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">ใช่</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+
+@* 	<script>
+		document.getElementById('cardRow').addEventListener('input', function () {
+			if (this.value.length === 10) {
+				const myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+					keyboard: false
+				})
+				myModal.show()
+			})
+
+		});
+	</script>
+ *@

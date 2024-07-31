@@ -1,0 +1,56 @@
+﻿@model IEnumerable<WebApplicationASP.Models.UserMobileModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card">
+    <div class="card-header bg-primary">
+        <h4>User Mobile All</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover" id="example1">
+            <thead class="bg-primary">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EMPCODE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EMAIL)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CREATE_DATE)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMPCODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMAIL)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CREATE_DATE)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new {  id=item.EMPCODE })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

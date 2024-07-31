@@ -1,0 +1,66 @@
+﻿@model WebApplicationASP.Models.BomHeaderModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>BomHeaderModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="myForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         
+            <div class="form-group">
+                <label asp-for="ITEM_CODE" class="control-label"></label>
+                <input asp-for="ITEM_CODE" class="form-control" />
+                <span asp-validation-for="ITEM_CODE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="INVENTORY_ITEM_ID" class="control-label"></label>
+                <input asp-for="INVENTORY_ITEM_ID" class="form-control" />
+                <span asp-validation-for="INVENTORY_ITEM_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="APPROVE_PATH_ID" class="control-label"></label>
+                <input asp-for="APPROVE_PATH_ID" class="form-control" />
+                <span asp-validation-for="APPROVE_PATH_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="APPROVE_FLAG" class="control-label"></label>
+                <input asp-for="APPROVE_FLAG" class="form-control" />
+                <span asp-validation-for="APPROVE_FLAG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="INTERFACE_FLAG" class="control-label"></label>
+                <input asp-for="INTERFACE_FLAG" class="form-control" />
+                <span asp-validation-for="INTERFACE_FLAG" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <label asp-for="CREATED_BY" class="control-label"></label>
+                <input asp-for="CREATED_BY" class="form-control" />
+                <span asp-validation-for="CREATED_BY" class="text-danger"></span>
+            </div>
+       
+            <div class="form-group">
+                <label asp-for="LAST_UPDATED_BY" class="control-label"></label>
+                <input asp-for="LAST_UPDATED_BY" class="form-control" />
+                <span asp-validation-for="LAST_UPDATED_BY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
